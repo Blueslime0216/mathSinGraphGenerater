@@ -6,6 +6,32 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>사인 함수 그리는 사이트</h1>
+    <input id="cycle" type="range"> <!-- 주기 -->
+    <input id="xMove" type="range"> <!-- x 평행 이동 -->
+
+    <canvas id="canvas"></canvas>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // 인풋의 값이 변경되면 캔버스에 그래프를 그리는 함수
+        function drawGraph() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const cycle = $('#cycle').val();
+            const xMove = $('#xMove').val();
+
+            canvas.width = 800;
+            canvas.height = 400;
+
+            ctx.beginPath();
+            ctx.moveTo(0, 200);
+            for (let x = 0; x < 800; x++) {
+                const y = Math.sin((x + xMove) * Math.PI / cycle) * 100 + 200;
+                ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+    </script>
 </body>
 </html>
